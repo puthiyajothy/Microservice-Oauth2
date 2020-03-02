@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class OauthConfig extends WebSecurityConfigurerAdapter implements AuthorizationServerConfigurer{
 	
 	@Autowired
-    AuthenticationManager authenticationManager;
+   public AuthenticationManager authenticationManager;
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Bean
@@ -33,7 +33,7 @@ public class OauthConfig extends WebSecurityConfigurerAdapter implements Authori
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("web").secret(passwordEncoder.encode("webpass")).scopes("READ", "WRITE").authorizedGrantTypes("password", "authorization_code");
+        clients.inMemory().withClient("web").secret(passwordEncoder.encode("password")).scopes("READ", "WRITE").authorizedGrantTypes("password", "authorization_code");
 
 	}
 

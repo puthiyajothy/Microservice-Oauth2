@@ -13,9 +13,9 @@ public class Userconfiguration extends GlobalAuthenticationConfigurerAdapter{
 
 	@Override
 	public void init(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("jothi").password("1234").roles("USER","ADMIN","MANAGER")
+		auth.inMemoryAuthentication().withUser("web").password(passwordEncoder.encode("password")).roles("USER","ADMIN","MANAGER")
 		.authorities("CAN_READ,CAN_WRITE","CAN_DELETE")
 		.and()
-		.withUser("dilu").password("manager").roles("USER","ADMIN").authorities("CAN_READ,CAN_WRITE");
+		.withUser("dilu").password(passwordEncoder.encode("manager")).roles("USER","ADMIN").authorities("CAN_READ,CAN_WRITE");
 	}
 }
