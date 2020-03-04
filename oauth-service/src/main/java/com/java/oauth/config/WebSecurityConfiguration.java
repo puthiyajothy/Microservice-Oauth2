@@ -17,8 +17,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 	
+	
+	
 	@Bean 	 	 	
-	protected AuthenticationManager authenticationManager() throws Exception {
+	protected AuthenticationManager getauthenticationManager() throws Exception {
 		return super.authenticationManagerBean();
 	}
 	
