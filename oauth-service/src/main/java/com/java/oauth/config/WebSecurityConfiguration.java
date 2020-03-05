@@ -13,25 +13,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-		
+
 	@Autowired
 	UserDetailsService userDetailsService;
-	
-	
-	
-	@Bean 	 	 	
+
+	@Bean
 	protected AuthenticationManager getauthenticationManager() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-	
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
 }

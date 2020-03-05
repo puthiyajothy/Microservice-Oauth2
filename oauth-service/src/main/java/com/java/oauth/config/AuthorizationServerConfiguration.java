@@ -15,39 +15,38 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 @Configuration
-public class AuthorizationServerConfiguration  implements AuthorizationServerConfigurer{
+public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
 
-	
 	@Autowired
 	PasswordEncoder passwordEncode;
-	
+
 	@Autowired
 	DataSource dataSource;
-	
+
 	@Autowired
 	AuthenticationManager authenticationManager;
-	
+
 	@Bean
 	TokenStore JdbcTokenStore() {
 		return new JdbcTokenStore(dataSource);
 	}
-	
+
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
-		
+		security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
+
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).passwordEncoder(passwordEncode);
-		
+		clients.jdbc(dataSource).passwordEncoder(passwordEncode);
+
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(JdbcTokenStore());
-		endpoints.authenticationManager(authenticationManager);		
+		endpoints.authenticationManager(authenticationManager);
 	}
 
 }

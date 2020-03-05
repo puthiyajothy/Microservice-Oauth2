@@ -14,20 +14,18 @@ import com.java.oauth.model.User;
 import com.java.oauth.repository.UserDetailsRepository;
 
 @Service("userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	UserDetailsRepository userDetailsRepository;
 
-	
-	
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<User> optional=userDetailsRepository.findByUsername(name);
+		Optional<User> optional = userDetailsRepository.findByUsername(name);
 		optional.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
 		UserDetails userDetails = new AuthUserDetails(optional.get());
 		new AccountStatusUserDetailsChecker().check(userDetails);
-		
+
 		return userDetails;
 	}
 

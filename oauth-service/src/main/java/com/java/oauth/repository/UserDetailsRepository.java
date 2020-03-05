@@ -6,5 +6,5 @@ import com.java.oauth.model.User;
 
 public interface UserDetailsRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> findByUsername(String name);
+	Optional<User> findByUsername(String name);
 }
